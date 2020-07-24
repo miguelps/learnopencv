@@ -4,7 +4,7 @@ import math
 import time
 import argparse
 
-def getFaceBox(net, frame, conf_threshold=0.7):
+def getFaceBox(net, frame, confidence_threshold=0.7):
     frameOpencvDnn = frame.copy()
     frameHeight = frameOpencvDnn.shape[0]
     frameWidth = frameOpencvDnn.shape[1]
@@ -15,7 +15,7 @@ def getFaceBox(net, frame, conf_threshold=0.7):
     bboxes = []
     for i in range(detections.shape[2]):
         confidence = detections[0, 0, i, 2]
-        if confidence > conf_threshold:
+        if confidence > confidence_threshold:
             x1 = int(detections[0, 0, i, 3] * frameWidth)
             y1 = int(detections[0, 0, i, 4] * frameHeight)
             x2 = int(detections[0, 0, i, 5] * frameWidth)
